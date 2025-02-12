@@ -12,6 +12,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Debug Secrets
+        run: |
+          echo "Host: ${{ secrets.AWS_HOST }}"
+          echo "Username: ${{ secrets.AWS_USERNAME }}"
+
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
