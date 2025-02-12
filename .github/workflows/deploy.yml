@@ -29,3 +29,5 @@ jobs:
             npm install
             pm2 restart
             pm2 log
+        timeout: 30s  # Increase timeout if needed
+        retry: 3      # Retry the SSH connection 3 times
