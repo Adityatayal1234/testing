@@ -2,7 +2,7 @@ const WebSocket = require('ws');
 
 const wss = new WebSocket.Server({ port: 8080 });
 
-console.log("WebSocket server running on ws://localhost:8080, check testing app");
+console.log("WebSocket server running on ws://localhost:8080, check testing app with flow data");
 
 wss.on('connection', (ws) => {
     console.log("Unity connected");
