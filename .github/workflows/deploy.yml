@@ -26,4 +26,3 @@ jobs:
             npm install
             pm2 restart node-app --update-env
             echo "Fetching latest PM2 logs..."
-            pm2 logs --lines 5
