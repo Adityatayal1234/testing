@@ -3,31 +3,24 @@ name: Deploy to AWS EC2
 on:
   push:
     branches:
-      - main  # Change this if using a different branch
+      - main  # Change to your branch if needed
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
-      - name: Debug Secrets
-        run: |
-          echo "Host: ${{ secrets.AWS_HOST }}"
-          echo "Username: ${{ secrets.AWS_USERNAME }}"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.AWS_HOST }}
           username: ${{ secrets.AWS_USERNAME }}
-          key: ${{ secrets.AWS_SSH_KEY }}
+          key: ${{ secrets.AWS_PRIVATE_KEY }}
           script: |
-            cd /home/ubuntu/testingApp
+            cd ${{ secrets.APP_DIRECTORY }}
             git pull origin main
             npm install
-            pm2 restart
-            pm2 log
-        timeout: 30s  # Increase timeout if needed
-        retry: 3      # Retry the SSH connection 3 times
+            pm2 restart node-app
